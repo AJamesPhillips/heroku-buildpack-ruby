@@ -26,5 +26,5 @@ unless File.exist? cache_target
 end
 
 puts "-----> Extracting PhantomJS binaries to bin/phantomjs"
-`mkdir -p #{BUILD_DIR}/bin`
+`mkdir -p #{BUILD_DIR}/bin/phantomjs`
 `tar zxf #{CACHE_DIR}/#{PJS_FILE_NAME} -C #{BUILD_DIR}/bin/phantomjs`
