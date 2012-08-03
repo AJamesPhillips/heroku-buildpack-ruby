@@ -28,3 +28,19 @@ end
 puts "-----> Extracting PhantomJS binaries to bin/phantomjs"
 `mkdir -p #{BUILD_DIR}/bin/phantomjs`
 `tar zxf #{CACHE_DIR}/#{PJS_FILE_NAME} -C #{BUILD_DIR}/bin/phantomjs`
+
+PJS_FORKED_VERSION="fork"
+PJS_S3_BUCKET="arachnys-kraken-phantomjs"
+
+PJS_FORK_FILE_NAME="buildpack-phantomjs-#{PJS_FORKED_VERSION}.tar.gz"
+BUILDPACK_PHANTOMJS_FORK_PACKAGE="http://#{PJS_S3_BUCKET}.s3.amazonaws.com/#{PJS_FORK_FILE_NAME}"
+
+cache_target = "#{CACHE_DIR}/#{PJS_FORK_FILE_NAME}"
+unless File.exist? cache_target
+  puts "-----> Fetching PhantomJS Fork buildpack binaries"
+  `curl #{BUILDPACK_PHANTOMJS_FORK_PACKAGE} -s -o #{cache_target}`
+end
+
+puts "-----> Extracting PhantomJS binaries to bin/phantomjs"
+`mkdir -p #{BUILD_DIR}/bin/phantomjs`
+`tar zxf #{CACHE_DIR}/#{PJS_FORK_FILE_NAME} -C #{BUILD_DIR}/bin/phantomjs`
