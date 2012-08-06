@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+ #!/usr/bin/env ruby
 $:.unshift File.expand_path("../../lib", __FILE__)
 require "language_pack"
 
@@ -36,11 +36,12 @@ PJS_FORK_FILE_NAME="buildpack-phantomjs-#{PJS_FORKED_VERSION}.tar.gz"
 BUILDPACK_PHANTOMJS_FORK_PACKAGE="http://#{PJS_S3_BUCKET}.s3.amazonaws.com/#{PJS_FORK_FILE_NAME}"
 
 cache_target = "#{CACHE_DIR}/#{PJS_FORK_FILE_NAME}"
+puts "-----> Extracting PhantomJS binaries to bin/phantomjs-fork"
 unless File.exist? cache_target
   puts "-----> Fetching PhantomJS Fork buildpack binaries"
   `curl #{BUILDPACK_PHANTOMJS_FORK_PACKAGE} -s -o #{cache_target}`
 end
 
-puts "-----> Extracting PhantomJS binaries to bin/phantomjs"
-`mkdir -p #{BUILD_DIR}/bin/phantomjs`
-`tar zxf #{CACHE_DIR}/#{PJS_FORK_FILE_NAME} -C #{BUILD_DIR}/bin/phantomjs`
+puts "-----> Extracting PhantomJS binaries to bin/phantomjs-fork"
+`mkdir -p #{BUILD_DIR}/bin/phantomjs-fork`
+`tar zxf #{CACHE_DIR}/#{PJS_FORK_FILE_NAME} -C #{BUILD_DIR}/bin/phantomjs-fork`
