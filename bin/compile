@@ -27,7 +27,7 @@ end
 
 puts "-----> Extracting PhantomJS binaries to bin/phantomjs"
 `mkdir -p #{BUILD_DIR}/bin/`
-`tar zxf #{CACHE_DIR}/#{PJS_FILE_NAME} -C #{BUILD_DIR}/bin`
+`tar zxf #{CACHE_DIR}/#{PJS_FILE_NAME} -C #{BUILD_DIR}/bin/phantomjs`
 
 PJS_FORKED_VERSION="fork"
 
@@ -42,4 +42,4 @@ end
 
 puts "-----> Extracting PhantomJS binaries to bin/phantomjs-fork"
 `mkdir -p #{BUILD_DIR}/bin/`
-`tar zxf #{cache_target} -C #{BUILD_DIR}/bin/`
+`tar zxf #{cache_target} -C #{BUILD_DIR}/bin/phantomjs-fork`
