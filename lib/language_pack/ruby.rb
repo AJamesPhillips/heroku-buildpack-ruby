@@ -325,7 +325,7 @@ ERROR
   def create_database_yml
     log("create_database_yml") do
       return unless File.directory?("config")
-      topic("Writing config/database.yml to read from DATABASE_URL")
+      topic("Writing config/database.yml to read from DATABASE_URL, modified to set prepared_statements: false")
       File.open("config/database.yml", "w") do |file|
         file.puts <<-DATABASE_YML
 <%
@@ -377,6 +377,7 @@ params = CGI.parse(uri.query || "")
   <%= attribute "password", password, true %>
   <%= attribute "host",     host %>
   <%= attribute "port",     port %>
+  prepared_statements: false #do not use attribute method as it will return an empty string
 
 <% params.each do |key, value| %>
   <%= key %>: <%= value.first %>
