@@ -321,11 +321,11 @@ ERROR
     end
   end
 
-  # writes ERB based database.yml for Rails. The database.yml uses the DATABASE_URL from the environment during runtime.
+  # writes ERB based database.yml for Rails. The database.yml uses the ARA_DATABASE_URL from the environment during runtime.
   def create_database_yml
     log("create_database_yml") do
       return unless File.directory?("config")
-      topic("Writing config/database.yml to read from DATABASE_URL, modified to set prepared_statements: false")
+      topic("Writing config/database.yml to read from ARA_DATABASE_URL, modified to set prepared_statements: false")
       File.open("config/database.yml", "w") do |file|
         file.puts <<-DATABASE_YML
 <%
@@ -334,9 +334,9 @@ require 'cgi'
 require 'uri'
 
 begin
-  uri = URI.parse(ENV["DATABASE_URL"])
+  uri = URI.parse(ENV["ARA_DATABASE_URL"])
 rescue URI::InvalidURIError
-  raise "Invalid DATABASE_URL"
+  raise "Invalid ARA_DATABASE_URL"
 end
 
 raise "No RACK_ENV or RAILS_ENV found" unless ENV["RAILS_ENV"] || ENV["RACK_ENV"]
